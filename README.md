@@ -52,12 +52,11 @@ Controlled by **Switch B** on the Transmitter:
 
 ### 3. Lighting System
 * **Turn Signals:** The code monitors the raw Steering Channel. If the value exceeds a defined threshold (e.g., > 1600 or < 1400), the corresponding side LED turn on.
-* **Front Strip:** Monitors an Aux channel (Channel 3).
-* There are 4 cases:
-* `Rx_Value < 1000`, the front strip turns ON;
-* `1000 < Rx_Value < 1500`, the front strip makes the kitt light effect (from the series Knight Rider);
-* `1500 < Rx_Value < 2000`, the front strip makes the police light effect (2 blue 2 red then 2 red 2 blue);
-* `2000 < Rx_Value`, the front strip turns OFF.
+* **Front Strip:** Monitors an Aux channel (Channel 3). There are 4 cases:
+  * `Rx_Value < 1000`: the front strip turns ON;
+  * `1000 < Rx_Value < 1500`: the front strip makes the kitt light effect (from the series Knight Rider);
+  * `1500 < Rx_Value < 2000`: the front strip makes the police light effect (2 blue 2 red then 2 red 2 blue);
+  * `2000 < Rx_Value`: the front strip turns OFF.
 
 ## 🚀 Installation
 
