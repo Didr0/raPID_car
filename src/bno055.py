@@ -86,6 +86,19 @@ class BNO055:
             return None
 
         try:
+            # --- 1. CHECK CALIBRATION ---
+            # Register 0x35: [Sys(2) | Gyro(2) | Accel(2) | Mag(2)]
+            calib_data = self._read_register(0x35, 1)
+            calib_val = calib_data[0]
+            
+            # Mask the bottom 2 bits to get Mag status (0-3)
+            mag_status = calib_val & 0x03 
+            
+            # If Mag is not fully calibrated (3), treat sensor as unhealthy
+            if mag_status < 3:
+                return None
+
+            # --- 2. READ DATA ---
             data = self._read_register(0x1A, 2)
             heading_raw = struct.unpack('<h', data)[0]
             
@@ -100,7 +113,7 @@ class BNO055:
         except Exception:
             self.connected = False
             return None
-
+        
     # ------------------------------
     #      CHECK CALIBRATION
     # ------------------------------
@@ -115,3 +128,6 @@ class BNO055:
             mag = val & 0x03
             return (sys, gyro, accel, mag)
         except: return (0,0,0,0)
+
+
+
